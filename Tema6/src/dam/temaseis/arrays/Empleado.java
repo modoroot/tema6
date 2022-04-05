@@ -1,7 +1,7 @@
 package dam.temaseis.arrays;
 
 import java.time.LocalDate;
-import java.util.Scanner;
+
 /**
  * Clase que define las propiedades, métodos y constructores de
  * los empleados
@@ -13,10 +13,7 @@ public class Empleado {
 	private String apellidos;
 	private String nif;
 	private LocalDate fechaAlta;
-	
-	public Empleado(String nif) {
-		this.nif = nif;
-	}
+
 	/**
 	 * Constructor principal
 	 * @param nombre
@@ -25,12 +22,19 @@ public class Empleado {
 	 * @param fechaAlta
 	 */
 	public Empleado(String nombre, String apellidos, String nif, LocalDate fechaAlta) {
+		this(nif);
 		this.nombre = nombre;
 		this.apellidos = apellidos;
-		this.nif = nif;
 		this.fechaAlta = fechaAlta;
 	}
-
+	/**
+	 * Constructor creado para los métodos buscarEmp(), modEmp()
+	 * @param nif
+	 */
+	public Empleado(String nif) {
+		this.nif = nif;
+	}
+	//Getters-Setters
 	public String getNombre() {
 		return nombre;
 	}
@@ -51,9 +55,6 @@ public class Empleado {
 	}
 	public LocalDate getFechaAlta() {
 		return fechaAlta;
-	}
-	public void setFechaAlta(LocalDate fechaAlta) {
-		this.fechaAlta = fechaAlta;
 	}
 
 	@Override

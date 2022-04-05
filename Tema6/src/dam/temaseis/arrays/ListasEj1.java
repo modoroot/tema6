@@ -12,16 +12,20 @@ import java.util.Scanner;
  * @version 1.0
  */
 public class ListasEj1 {
+
 	//Inicialización de lista de los empleados. Static para poder usarlo en métodos
 	//de la clase Empleado
 	private static ArrayList<Empleado> listaEmp = new ArrayList<Empleado>();
 	public static void main(String[] args) {
 		int opcion = 0;
+		Scanner sc = new Scanner(System.in);
+		//do {
+
 		//Añadimos los elementos a la lista
-		Empleado emp1 = new Empleado("Nombre1", "Apellidos1", "12345678A", LocalDate.parse("2022-02-13"));
-		Empleado emp2 = new Empleado("Nombre2", "Apellidos2", "87654321A", LocalDate.parse("2020-12-11"));
-		Empleado emp3 = new Empleado("Nombre3", "Apellidos3", "12345678B", LocalDate.parse("2005-07-28"));
-		Empleado emp4 = new Empleado("Nombre4", "Apellidos4", "87654321B", LocalDate.parse("2015-05-01"));
+		Empleado emp1 = new Empleado("Bicho", "Pelao", "83282348A", LocalDate.parse("2022-02-13"));
+		Empleado emp2 = new Empleado("Pulga", "Calva", "32942949X", LocalDate.parse("2020-12-11"));
+		Empleado emp3 = new Empleado("Rana", "Afeitada", "23894823Y", LocalDate.parse("2005-07-28"));
+		Empleado emp4 = new Empleado("Caballo", "Rapao", "65865495R", LocalDate.parse("2015-05-01"));
 		listaEmp.add(emp1);
 		listaEmp.add(emp2);
 		listaEmp.add(emp3);
@@ -36,31 +40,37 @@ public class ListasEj1 {
 				return new String(e1.getNif()).compareTo(new String(e2.getNif()));
 			}
 		});
+
 		System.out.println("1. Buscar empleado por NIF"+"\n"+
 				"2. Modificar un empleado de la lista"+"\n"+
 				"3. Eliminar un empleado de la lista"+"\n"+
 				"4. Añadir un nuevo empleado"+"\n"+
 				"5. Ordenar la lista de empleados por una propiedad indicada como parámetro"+"\n"+
 				"6. Salir");
-		Scanner sc = new Scanner(System.in);
+
 		opcion = sc.nextInt();
+
 		switch(opcion) {
 		case 1:
 			ListasEj1.buscarEmp();
 			break;
 		case 2:
+			ListasEj1.modEmp();
 			break;
 		case 3:
+			ListasEj1.delEmp();
 			break;
 		case 4:
+			ListasEj1.addEmp();
 			break;
 		case 5:
-			break;
-		case 6:
-			System.exit(0);
+			ListasEj1.sortEmp();
 			break;
 		}
 		sc.close();
+		//}
+		//while(opcion!=6); 
+		//System.exit(0);
 	}
 	/**
 	 * Método estático que busca si existe el NIF introducido de un empleado
@@ -85,6 +95,97 @@ public class ListasEj1 {
 		sc.close();
 	}
 	public static void modEmp() {
-		
+		System.out.println("Selecciona el empleado (escribe su NIF): ");
+		for(int i = 0; i < listaEmp.size(); i++) {
+			System.out.println(listaEmp.get(i).getNif());
+		}
+		Scanner sc = new Scanner(System.in);
+		Empleado empleado = new Empleado(sc.next());
+		//Recorre el ArrayList listaEmp buscando si coincide
+		//algún NIF con el introducido por consola
+		for(int i = 0; i<listaEmp.size();i++) {
+			Empleado e = listaEmp.get(i);
+			if(e.getNif().equals(empleado.getNif())) {
+				System.out.println("Introduce el nuevo NIF: ");
+				Empleado empNif = new Empleado(sc.next());
+				e.setNif(empNif.getNif());
+				System.out.println(listaEmp.toString());
+			}
+		}
+		sc.close();
 	}
+	public static void delEmp() {
+		System.out.println("Selecciona el empleado (escribe su NIF): ");
+		for(int i = 0; i < listaEmp.size(); i++) {
+			System.out.println(listaEmp.get(i).getNif());
+		}
+		Scanner sc = new Scanner(System.in);
+		Empleado empleado = new Empleado(sc.next());
+		//Recorre el ArrayList listaEmp buscando si coincide
+		//algún NIF con el introducido por consola
+		for(int i = 0; i<listaEmp.size();i++) {
+			Empleado e = listaEmp.get(i);
+			if(e.getNif().equals(empleado.getNif())) {
+				listaEmp.remove(i);
+				System.out.println(listaEmp.toString());
+			}
+		}
+		sc.close();
+	}
+	public static void addEmp() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduce sus datos de la siguiente forma:"+"\n"
+				+ "Nombre"+"\n"+"Apellidos"+"\n"+"NIF");
+		listaEmp.add(new Empleado(sc.next(), sc.next(), sc.next(), LocalDate.now()));
+		System.out.println(listaEmp.toString());
+		sc.close();
+	}
+	public static void sortEmp() {
+		int opcion;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Introduce el parámetro por el cual quieres ordenar la lista: "+"\n"+
+				"1. Nombre"+"\n"+"2. Apellidos"+"\n"+"3. NIF"+"\n"+"4. Fecha alta");
+		opcion = sc.nextInt();
+		switch(opcion) {
+		case 1:
+			Collections.sort(listaEmp, new Comparator<Empleado>() {
+				@Override
+				public int compare(Empleado e1, Empleado e2) {
+					return new String(e1.getNombre()).compareTo(new String(e2.getNombre()));
+				}
+			});
+			System.out.println(listaEmp.toString());
+			break;
+		case 2:
+			Collections.sort(listaEmp, new Comparator<Empleado>() {
+				@Override
+				public int compare(Empleado e1, Empleado e2) {
+					return new String(e1.getApellidos()).compareTo(new String(e2.getApellidos()));
+				}
+			});
+			System.out.println(listaEmp.toString());
+			break;
+		case 3:
+			Collections.sort(listaEmp, new Comparator<Empleado>() {
+				@Override
+				public int compare(Empleado e1, Empleado e2) {
+					return new String(e1.getNif()).compareTo(new String(e2.getNif()));
+				}
+			});
+			System.out.println(listaEmp.toString());
+			break;
+		case 4:
+			Collections.sort(listaEmp, new Comparator<Empleado>() {
+				@Override
+				public int compare(Empleado e1, Empleado e2) {
+					return new String(e1.getFechaAlta().toString())
+							.compareTo(new String(e2.getFechaAlta().toString()));
+				}
+			});
+			System.out.println(listaEmp.toString());
+			break;
+		}
+		sc.close();
+	}
+
 }
