@@ -28,7 +28,7 @@ public class Empleado {
 		this.fechaAlta = fechaAlta;
 	}
 	/**
-	 * Constructor creado para los métodos buscarEmp(), modEmp()
+	 * Constructor creado para los métodos buscarEmp(), modEmp(), delEmp()
 	 * @param nif
 	 */
 	public Empleado(String nif) {
