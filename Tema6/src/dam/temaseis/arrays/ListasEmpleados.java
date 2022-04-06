@@ -12,23 +12,23 @@ import java.util.Scanner;
  * @version 1.0
  */
 public class ListasEmpleados {
-
 	//Inicialización de lista de los empleados. Static para poder usarlo en métodos
 	//de la clase Empleado
 	private static ArrayList<Empleado> listaEmp = new ArrayList<Empleado>();
+	//Instancio aquí el Scanner para poder usarlo en los métodos
 	private static Scanner sc = new Scanner(System.in);
 	public static void main(String[] args) {
 		int opcion = 0;
-			//Añadimos los elementos a la lista
-			Empleado emp1 = new Empleado("Bicho", "Pelao", "83282348A", LocalDate.parse("2022-02-13"));
-			Empleado emp2 = new Empleado("Pulga", "Calva", "32942949X", LocalDate.parse("2020-12-11"));
-			Empleado emp3 = new Empleado("Rana", "Afeitada", "23894823Y", LocalDate.parse("2005-07-28"));
-			Empleado emp4 = new Empleado("Caballo", "Rapao", "65865495R", LocalDate.parse("2015-05-01"));
-			listaEmp.add(emp1);
-			listaEmp.add(emp2);
-			listaEmp.add(emp3);
-			listaEmp.add(emp4);
-			do {
+		//Añadimos los elementos a la lista
+		Empleado emp1 = new Empleado("Bicho", "Pelao", "83282348A", LocalDate.parse("2022-02-13"));
+		Empleado emp2 = new Empleado("Pulga", "Calva", "32942949X", LocalDate.parse("2020-12-11"));
+		Empleado emp3 = new Empleado("Rana", "Afeitada", "23894823Y", LocalDate.parse("2005-07-28"));
+		Empleado emp4 = new Empleado("Caballo", "Rapao", "65865495R", LocalDate.parse("2015-05-01"));
+		listaEmp.add(emp1);
+		listaEmp.add(emp2);
+		listaEmp.add(emp3);
+		listaEmp.add(emp4);
+		do {
 			/**
 			 * A partir del método de Collections sort, ordenamos el ArrayList a partir del método
 			 * compareTo a partir del NIF de los empleados
@@ -142,7 +142,7 @@ public class ListasEmpleados {
 	}
 	/**
 	 * Ordena el ArrayList según la selección que escojamos a partir
-	 * de la clase Collections y su método sort({});
+	 * de la clase Collections y su método sort({}); de forma descendente
 	 */
 	public static void sortEmp() {
 		int opcion;
